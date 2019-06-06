@@ -88,8 +88,7 @@ void CopyArcStartPoint(StartPoint_T *ArcStartPoint);
 void ArcMidToLine1EndPoint(MidPoint_T *ArcMidPoint,EndPoint_T *Line1EndPoint);
 void ArcMidToLine2StartPoint(MidPoint_T *ArcMidPoint,StartPoint_T *Line2StartPoint);
 unsigned int ConvertArcOrderToLineOrder(unsigned int arc_order);
-void InitStartPointDataBuf(StartPoint_T* line_start_point);
-void InitEndPointDataBuf(EndPoint_T* line_point);
-
+void InitStartPointDataBuf(StartPoint_T* line_start_point,unsigned int is_arc_point);
+void InitEndPointDataBuf(EndPoint_T* line_point,unsigned int is_arc_point);
 
 #endif // _ARC2LINE_H
