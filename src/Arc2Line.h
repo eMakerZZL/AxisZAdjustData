@@ -4,6 +4,12 @@
 #include <string.h>
 #include "SaveAdjustData.h"
 
+#define LINE1_START_POINT   1
+#define LINE1_END_POINT     2
+#define LINE2_START_POINT   3
+#define LINE2_END_POINT     4
+
+
 #define ORDER_LINE_START		0x12	/**< 直线起点	*/
 #define ORDER_LINE_END			0x14	/**< 直线终点	*/
 #define ORDER_ARC_START			0x15	/**< 圆弧起点	*/

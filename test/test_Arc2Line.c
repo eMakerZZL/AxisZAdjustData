@@ -44,25 +44,6 @@ void test_Arc2Line_ArcMidToLine1EndPoint(void)
     ArcMidToLine1EndPoint(&ArcMidPoint,&convert_point);
 
     TEST_ASSERT_EQUAL_MEMORY(&compare_point,&compare_point,sizeof(EndPoint_T));
-
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wOrder      , convert_point.wOrder); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wComConfig  , convert_point.wComConfig); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wX          , convert_point.wX); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wY          , convert_point.wY); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wZ          , convert_point.wZ); */
-    /** TEST_ASSERT_EQUAL_INT32 (compare_point.iR          , convert_point.iR); */
-    /** TEST_ASSERT_EQUAL_INT32 (compare_point.iA          , convert_point.iA); */
-    /** TEST_ASSERT_EQUAL_INT32 (compare_point.iB          , convert_point.iB); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wId         , convert_point.wId); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wUpDistance , convert_point.wUpDistance); */
-    /** TEST_ASSERT_EQUAL_INT32 (compare_point.iDelay      , convert_point.iDelay); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wGlue       , convert_point.wGlue); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wName[0]    , convert_point.wName[0]); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wName[1]    , convert_point.wName[1]); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wName[2]    , convert_point.wName[2]); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wName[3]    , convert_point.wName[3]); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wWorkAdjCfg , convert_point.wWorkAdjCfg); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wRev        , convert_point.wRev); */
 }
 
 void test_Arc2Line_ArcMidToLine2StartPoint(void)
@@ -74,27 +55,6 @@ void test_Arc2Line_ArcMidToLine2StartPoint(void)
     ArcMidToLine2StartPoint(&ArcMidPoint,&convert_point);
 
     TEST_ASSERT_EQUAL_MEMORY(&compare_point,&compare_point,sizeof(StartPoint_T));
-
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wOrder      , convert_point.wOrder); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wComConfig  , convert_point.wComConfig); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wX          , convert_point.wX); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wY          , convert_point.wY); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wZ          , convert_point.wZ); */
-    /** TEST_ASSERT_EQUAL_INT32 (compare_point.iR          , convert_point.iR); */
-    /** TEST_ASSERT_EQUAL_INT32 (compare_point.iA          , convert_point.iA); */
-    /** TEST_ASSERT_EQUAL_INT32 (compare_point.iB          , convert_point.iB); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wId         , convert_point.wId); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wBlankSpeed , convert_point.wBlankSpeed); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wWorkSpeed  , convert_point.wWorkSpeed); */
-    /** TEST_ASSERT_EQUAL_INT32 (compare_point.iDelay      , convert_point.iDelay); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wGlue       , convert_point.wGlue); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wJobConfig  , convert_point.wJobConfig); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wName[0]    , convert_point.wName[0]); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wName[1]    , convert_point.wName[1]); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wName[2]    , convert_point.wName[2]); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wName[3]    , convert_point.wName[3]); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wData       , convert_point.wData); */
-    /** TEST_ASSERT_EQUAL_UINT32(compare_point.wWorkAdjCfg , convert_point.wWorkAdjCfg); */
 }
 
 void test_Arc2Line_ConvertArcOrderToLineOrder(void)
@@ -127,8 +87,9 @@ void test_Arc2Line_LineStartPointNeedAdjust(void)
 
     TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0   ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(6,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(1   ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(7,get_AxisZAdjustBufLength());
 }
 
 void test_Arc2Line_LineStartPointNotAdjust(void)
@@ -153,10 +114,11 @@ void test_Arc2Line_LineEndPointNeedAdjust(void)
 
     InitEndPointDataBuf(&end_point,0);
 
-    TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 3));
-    TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0   ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(6,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(14  ,*((unsigned int *)pdata + 3));
+    TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 4));
+    TEST_ASSERT_EQUAL_UINT32(1   ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(7,get_AxisZAdjustBufLength());
 }
 
 void test_Arc2Line_LineEndPointNotAdjust(void)
@@ -180,7 +142,7 @@ void test_Arc2Line_OneLineOnlyNeedEndAdjust(void)
     start_point.wWorkAdjCfg = 256;
 
     EndPoint_T end_point;
-    end_point.wComConfig  = 15;
+    end_point.wComConfig  = 16;
     end_point.wWorkAdjCfg = 0;
 
     InitStartPointDataBuf(&start_point,0);
@@ -188,8 +150,9 @@ void test_Arc2Line_OneLineOnlyNeedEndAdjust(void)
 
     TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0   ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(6,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(1   ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(7,get_AxisZAdjustBufLength());
 }
 
 void test_Arc2Line_OneLineOnlyNeedStartAdjust(void)
@@ -199,7 +162,7 @@ void test_Arc2Line_OneLineOnlyNeedStartAdjust(void)
     start_point.wWorkAdjCfg = 0;
 
     EndPoint_T end_point;
-    end_point.wComConfig  = 15;
+    end_point.wComConfig  = 16;
     end_point.wWorkAdjCfg = 256;
 
     InitStartPointDataBuf(&start_point,0);
@@ -207,8 +170,9 @@ void test_Arc2Line_OneLineOnlyNeedStartAdjust(void)
 
     TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0   ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(6,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(1   ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(7,get_AxisZAdjustBufLength());
 }
 
 void test_Arc2Line_OneLineNeedWholeAdjust(void)
@@ -218,7 +182,7 @@ void test_Arc2Line_OneLineNeedWholeAdjust(void)
     start_point.wWorkAdjCfg = 0;
 
     EndPoint_T end_point;
-    end_point.wComConfig  = 15;
+    end_point.wComConfig  = 16;
     end_point.wWorkAdjCfg = 0;
 
     InitStartPointDataBuf(&start_point,0);
@@ -226,8 +190,10 @@ void test_Arc2Line_OneLineNeedWholeAdjust(void)
 
     TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0   ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(6,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(2   ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 7));
+    TEST_ASSERT_EQUAL_UINT32(8,get_AxisZAdjustBufLength());
 }
 
 void test_Arc2Line_MultLineNeedWholeAdjust(void)
@@ -237,7 +203,7 @@ void test_Arc2Line_MultLineNeedWholeAdjust(void)
     start_point.wWorkAdjCfg = 0;
 
     EndPoint_T end_point;
-    end_point.wComConfig  = 15;
+    end_point.wComConfig  = 16;
     end_point.wWorkAdjCfg = 0;
 
     InitStartPointDataBuf(&start_point,0);
@@ -251,11 +217,20 @@ void test_Arc2Line_MultLineNeedWholeAdjust(void)
 
     TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0   ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 6));
-    TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 7));
-    TEST_ASSERT_EQUAL_UINT32(0   ,*((unsigned int *)pdata + 8));
-    TEST_ASSERT_EQUAL_UINT32(12,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(2   ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 7));
+    TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 8));
+    TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 9));
+    TEST_ASSERT_EQUAL_UINT32(2   ,*((unsigned int *)pdata + 10));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 11));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 12));
+    TEST_ASSERT_EQUAL_UINT32(15  ,*((unsigned int *)pdata + 13));
+    TEST_ASSERT_EQUAL_UINT32(16  ,*((unsigned int *)pdata + 14));
+    TEST_ASSERT_EQUAL_UINT32(2   ,*((unsigned int *)pdata + 15));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 16));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 17));
+    TEST_ASSERT_EQUAL_UINT32(18,get_AxisZAdjustBufLength());
 }
 
 void test_Arc2Line_OneLineWholeDontAdjust(void)
@@ -299,15 +274,18 @@ void test_Arc2Line_OneArcNeedWholeAdjust(void)
     ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
     
     InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
 
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
 
     TEST_ASSERT_EQUAL_UINT32(15,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(17,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0 ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(6 ,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(3 ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 7));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 8));
+    TEST_ASSERT_EQUAL_UINT32(9 ,get_AxisZAdjustBufLength());
 }
 
 void test_Arc2Line_OneArcNeedStartAndMidAdjust(void)
@@ -332,15 +310,17 @@ void test_Arc2Line_OneArcNeedStartAndMidAdjust(void)
     ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
     
     InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
 
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
 
     TEST_ASSERT_EQUAL_UINT32(15,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(17,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0 ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(6 ,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(2 ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 7));
+    TEST_ASSERT_EQUAL_UINT32(8 ,get_AxisZAdjustBufLength());
 
 }
 
@@ -354,28 +334,27 @@ void test_Arc2Line_OneArcDontNeedAdjust(void)
     StartPoint_T arc_line2_start_point;
 
     arc_start_point.wComConfig  = 15;
-    arc_start_point.wWorkAdjCfg = 256;
+    arc_start_point.wWorkAdjCfg = 768;
 
     arc_mid_point.wComConfig  = 16;
-    arc_mid_point.wWorkAdjCfg = 256;
+    arc_mid_point.wWorkAdjCfg = 768;
 
     arc_end_point.wComConfig  = 17;
-    arc_end_point.wWorkAdjCfg = 256;
+    arc_end_point.wWorkAdjCfg = 768;
 
     ArcMidToLine1EndPoint(&arc_mid_point,&arc_line1_end_point);
     ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
     
     InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
 
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
 
     TEST_ASSERT_EQUAL_UINT32(0,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(0,*((unsigned int *)pdata + 4));
     TEST_ASSERT_EQUAL_UINT32(0,*((unsigned int *)pdata + 5));
     TEST_ASSERT_EQUAL_UINT32(3,get_AxisZAdjustBufLength());
-
 }
 
 void test_Arc2Line_MultArcNeedWholeAdjust(void)
@@ -400,10 +379,10 @@ void test_Arc2Line_MultArcNeedWholeAdjust(void)
     ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
     
     InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
 
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
 
     arc_start_point.wComConfig  = 18;
     arc_start_point.wWorkAdjCfg = 512;
@@ -418,72 +397,25 @@ void test_Arc2Line_MultArcNeedWholeAdjust(void)
     ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
     
     InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
 
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
 
+    TEST_ASSERT_EQUAL_UINT32(2,*((unsigned int *)pdata + 2));
     TEST_ASSERT_EQUAL_UINT32(15,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(17,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0 ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(18,*((unsigned int *)pdata + 6));
-    TEST_ASSERT_EQUAL_UINT32(20,*((unsigned int *)pdata + 7));
-    TEST_ASSERT_EQUAL_UINT32(0 ,*((unsigned int *)pdata + 8));
-    TEST_ASSERT_EQUAL_UINT32(9 ,get_AxisZAdjustBufLength());
-}
-
-void test_Arc2Line_OneWholeArcAndDontAdjutEndArc(void)
-{
-    StartPoint_T arc_start_point;    
-    MidPoint_T   arc_mid_point;    
-    EndPoint_T   arc_end_point;    
-
-    EndPoint_T   arc_line1_end_point;
-    StartPoint_T arc_line2_start_point;
-
-    arc_start_point.wComConfig  = 15;
-    arc_start_point.wWorkAdjCfg = 512;
-
-    arc_mid_point.wComConfig  = 16;
-    arc_mid_point.wWorkAdjCfg = 512;
-
-    arc_end_point.wComConfig  = 17;
-    arc_end_point.wWorkAdjCfg = 512;
-
-    ArcMidToLine1EndPoint(&arc_mid_point,&arc_line1_end_point);
-    ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
-    
-    InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
-
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
-
-    arc_start_point.wComConfig  = 18;
-    arc_start_point.wWorkAdjCfg = 512;
-
-    arc_mid_point.wComConfig  = 19;
-    arc_mid_point.wWorkAdjCfg = 512;
-
-    arc_end_point.wComConfig  = 20;
-    arc_end_point.wWorkAdjCfg = 768;
-
-    ArcMidToLine1EndPoint(&arc_mid_point,&arc_line1_end_point);
-    ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
-    
-    InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
-
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
-
-    TEST_ASSERT_EQUAL_UINT32(15,*((unsigned int *)pdata + 3));
-    TEST_ASSERT_EQUAL_UINT32(17,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0 ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(18,*((unsigned int *)pdata + 6));
-    TEST_ASSERT_EQUAL_UINT32(20,*((unsigned int *)pdata + 7));
-    TEST_ASSERT_EQUAL_UINT32(0 ,*((unsigned int *)pdata + 8));
-    TEST_ASSERT_EQUAL_UINT32(9 ,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(3 ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 7));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 8));
+    TEST_ASSERT_EQUAL_UINT32(18,*((unsigned int *)pdata + 9));
+    TEST_ASSERT_EQUAL_UINT32(20,*((unsigned int *)pdata + 10));
+    TEST_ASSERT_EQUAL_UINT32(3 ,*((unsigned int *)pdata + 11));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 12));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 13));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 14));
+    TEST_ASSERT_EQUAL_UINT32(15 ,get_AxisZAdjustBufLength());
 }
 
 void test_Arc2Line_DontAdjutEndArcAndOneWholeArc(void)
@@ -502,16 +434,16 @@ void test_Arc2Line_DontAdjutEndArcAndOneWholeArc(void)
     arc_mid_point.wWorkAdjCfg = 0;
 
     arc_end_point.wComConfig  = 17;
-    arc_end_point.wWorkAdjCfg = 0;
+    arc_end_point.wWorkAdjCfg = 256;
 
     ArcMidToLine1EndPoint(&arc_mid_point,&arc_line1_end_point);
     ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
     
     InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
 
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,LINE2_END_POINT);
 
     arc_start_point.wComConfig  = 18;
     arc_start_point.wWorkAdjCfg = 512;
@@ -526,16 +458,95 @@ void test_Arc2Line_DontAdjutEndArcAndOneWholeArc(void)
     ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
     
     InitStartPointDataBuf(&arc_start_point,1);
-    InitEndPointDataBuf(&arc_line1_end_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
 
-    InitStartPointDataBuf(&arc_line2_start_point,1);
-    InitEndPointDataBuf(&arc_end_point,1);
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
 
     TEST_ASSERT_EQUAL_UINT32(15,*((unsigned int *)pdata + 3));
     TEST_ASSERT_EQUAL_UINT32(17,*((unsigned int *)pdata + 4));
-    TEST_ASSERT_EQUAL_UINT32(0 ,*((unsigned int *)pdata + 5));
-    TEST_ASSERT_EQUAL_UINT32(18,*((unsigned int *)pdata + 6));
-    TEST_ASSERT_EQUAL_UINT32(20,*((unsigned int *)pdata + 7));
-    TEST_ASSERT_EQUAL_UINT32(0 ,*((unsigned int *)pdata + 8));
-    TEST_ASSERT_EQUAL_UINT32(9 ,get_AxisZAdjustBufLength());
+    TEST_ASSERT_EQUAL_UINT32(5 ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 7));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 8));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 9));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 10));
+    TEST_ASSERT_EQUAL_UINT32(11 ,get_AxisZAdjustBufLength());
+}
+
+void test_Arc2Line_SerialArc(void)
+{
+    StartPoint_T arc_start_point;    
+    MidPoint_T   arc_mid_point;    
+    EndPoint_T   arc_end_point;    
+
+    EndPoint_T   arc_line1_end_point;
+    StartPoint_T arc_line2_start_point;
+
+    arc_start_point.wComConfig  = 15;
+    arc_start_point.wWorkAdjCfg = 0;
+
+    arc_mid_point.wComConfig  = 16;
+    arc_mid_point.wWorkAdjCfg = 0;
+
+    arc_end_point.wComConfig  = 17;
+    arc_end_point.wWorkAdjCfg = 256;
+
+    ArcMidToLine1EndPoint(&arc_mid_point,&arc_line1_end_point);
+    ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
+    
+    InitStartPointDataBuf(&arc_start_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
+
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
+
+    arc_start_point.wComConfig  = 18;
+    arc_start_point.wWorkAdjCfg = 0;
+
+    arc_mid_point.wComConfig  = 19;
+    arc_mid_point.wWorkAdjCfg = 0;
+
+    arc_end_point.wComConfig  = 20;
+    arc_end_point.wWorkAdjCfg = 256;
+
+    ArcMidToLine1EndPoint(&arc_mid_point,&arc_line1_end_point);
+    ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
+    
+    InitStartPointDataBuf(&arc_start_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
+
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
+
+    arc_start_point.wComConfig  = 21;
+    arc_start_point.wWorkAdjCfg = 512;
+
+    arc_mid_point.wComConfig  = 22;
+    arc_mid_point.wWorkAdjCfg = 512;
+
+    arc_end_point.wComConfig  = 23;
+    arc_end_point.wWorkAdjCfg = 512;
+
+    ArcMidToLine1EndPoint(&arc_mid_point,&arc_line1_end_point);
+    ArcMidToLine2StartPoint(&arc_mid_point,&arc_line2_start_point);
+    
+    InitStartPointDataBuf(&arc_start_point,1);
+    InitEndPointDataBuf(&arc_line1_end_point,2);
+
+    InitStartPointDataBuf(&arc_line2_start_point,3);
+    InitEndPointDataBuf(&arc_end_point,4);
+
+    TEST_ASSERT_EQUAL_UINT32(15,*((unsigned int *)pdata + 3));
+    TEST_ASSERT_EQUAL_UINT32(17,*((unsigned int *)pdata + 4));
+    TEST_ASSERT_EQUAL_UINT32(7 ,*((unsigned int *)pdata + 5));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 6));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 7));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 8));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 9));
+    TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 10));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 11));
+    TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 12));
+    TEST_ASSERT_EQUAL_UINT32(13 ,get_AxisZAdjustBufLength());
+
 }

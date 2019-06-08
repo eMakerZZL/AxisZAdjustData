@@ -100,23 +100,26 @@ unsigned int ConvertArcOrderToLineOrder(unsigned int arc_order)
     return line_order;
 }
 
+/**
+ * @brief   InitStartPointDataBuf 
+ *
+ * @param   line_start_point
+ * @param   is_arc_point
+ */
 void InitStartPointDataBuf(StartPoint_T* line_start_point,unsigned int is_arc_point)
 {
     unsigned int IsAlreadyAdjust   = (line_start_point->wWorkAdjCfg >> 8) & 0x01;
     unsigned int IsLastAdjustPoint = (line_start_point->wWorkAdjCfg >> 9) & 0x01;
     unsigned int wInstrIndex       =  line_start_point->wComConfig & FILE_INSTR_INDEX_ORIGIN_INDEX_MASK;
 
-
-    /**
-     * @brief 看看是不是需要定义新的数据结构,缩减测试代码体积
-     *
-     * @param IsAlreadyAdjust
-     */
     if (IsAlreadyAdjust == 0) {
-        if (IsAlreadyHasLineDataBuf++ == 0) {
-            if(is_arc_point) create_AxisZAdjustDataHeader(wInstrIndex,wInstrIndex + 2);
-            else             create_AxisZAdjustDataHeader(wInstrIndex,wInstrIndex + 1);
+        if (is_arc_point) {
+            if(is_arc_point == LINE1_START_POINT && IsAlreadyHasLineDataBuf++ == 0) create_AxisZAdjustDataHeader(wInstrIndex,wInstrIndex + 2);
+            if(is_arc_point == LINE2_START_POINT) return;
+        } else {
+            if(IsAlreadyHasLineDataBuf++ == 0) create_AxisZAdjustDataHeader(wInstrIndex,wInstrIndex + 1);
         }
+        insert_AxisZAdjustData(1000);
     }
 }
 
@@ -127,12 +130,15 @@ void InitEndPointDataBuf(EndPoint_T* line_point,unsigned int is_arc_point)
     unsigned int wInstrIndex       =  line_point->wComConfig & FILE_INSTR_INDEX_ORIGIN_INDEX_MASK;
 
     if (IsAlreadyAdjust == 0) {
-        if(IsAlreadyHasLineDataBuf == 0) create_AxisZAdjustDataHeader(wInstrIndex,wInstrIndex + 1);
-        else {
-            if (is_arc_point){
-                if (IsAlreadyHasLineDataBuf >= 2 && IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0;
-            }
-            else IsAlreadyHasLineDataBuf = 0;
-        } 
+        if (is_arc_point) {
+           if (is_arc_point == LINE1_END_POINT) ; 
+           if (is_arc_point == LINE2_END_POINT){
+                if (IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0;
+           } 
+        } else {
+           if (IsAlreadyHasLineDataBuf == 0) create_AxisZAdjustDataHeader(wInstrIndex - 1,wInstrIndex); 
+           else IsAlreadyHasLineDataBuf = 0;
+        }
+        insert_AxisZAdjustData(2000);
     }
 }
