@@ -1,12 +1,12 @@
 #include "SaveAdjustData.h"
 
 
-static unsigned int *pdata = 0;
-static AxisZAdjustDataBuf_t AxisZAdjustDataBuf = {0,0,0};
+//static unsigned int *pdata = 0;
+static AxisZAdjustDataBuf_t AxisZAdjustDataBuf = {0,0,0,0};
 
 void* init_AxixZAdjustDataBuf(void)
 {
-    pdata = malloc(sizeof(char)*SAVE_AXIX_Z_ADJUST_DATA_BUF_LENTH);
+    unsigned int *pdata = malloc(sizeof(char)*SAVE_AXIX_Z_ADJUST_DATA_BUF_LENTH);
     
     AxisZAdjustDataBuf.pAdjustFileHeader = (AxisZAdjustFileHeader_t *)(pdata);
     AxisZAdjustDataBuf.pAdjustDataHeader = 0;

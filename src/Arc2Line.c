@@ -15,7 +15,7 @@ void ArcMidToLine1EndPoint(MidPoint_T *ArcMidPoint,EndPoint_T *Line1EndPoint)
 {
     /**
      * @brief 拷贝ArcMidPoint的基本参数到Line1EndPoint 
-     */
+    */
     Line1EndPoint->wOrder      = ArcMidPoint->wOrder;
     Line1EndPoint->wComConfig  = ArcMidPoint->wComConfig;
     Line1EndPoint->wX          = ArcMidPoint->wX;
@@ -138,5 +138,11 @@ void InitEndPointDataBuf(EndPoint_T* line_point,unsigned int is_arc_point)
            else IsAlreadyHasLineDataBuf = 0;
         }
         insert_AxisZAdjustData(2000);
+    }
+    else{
+          if (is_arc_point) {
+             if (is_arc_point == LINE2_END_POINT && IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0;
+		}
+        else IsAlreadyHasLineDataBuf = 0;
     }
 }
