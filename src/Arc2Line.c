@@ -134,15 +134,18 @@ void InitEndPointDataBuf(EndPoint_T* line_point,unsigned int is_arc_point)
            if (is_arc_point == LINE1_END_POINT) ; 
            if (is_arc_point == LINE2_END_POINT && IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0; 
         } else {
-           if (IsAlreadyHasLineDataBuf == 0) create_AxisZAdjustDataHeader(wInstrIndex - 1,wInstrIndex); 
-           else IsAlreadyHasLineDataBuf = 0;
+           if (IsAlreadyHasLineDataBuf == 0) create_AxisZAdjustDataHeader(wInstrIndex - 1,wInstrIndex);
+           /** else IsAlreadyHasLineDataBuf = 0; */
+           if(IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0;
         }
         insert_AxisZAdjustData(2000);
     }
     else{
           if (is_arc_point) {
              if (is_arc_point == LINE2_END_POINT && IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0;
-		}
-        else IsAlreadyHasLineDataBuf = 0;
+		  }
+          else {
+              if(IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0;
+          }
     }
 }
