@@ -136,7 +136,7 @@ void InitEndPointDataBuf(EndPoint_T* line_point,unsigned int is_arc_point)
         } else {
            if (IsAlreadyHasLineDataBuf == 0) create_AxisZAdjustDataHeader(wInstrIndex - 1,wInstrIndex);
            /** else IsAlreadyHasLineDataBuf = 0; */
-           if(IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0;
+           else if(IsLastAdjustPoint) IsAlreadyHasLineDataBuf = 0;
         }
         insert_AxisZAdjustData(2000);
     }

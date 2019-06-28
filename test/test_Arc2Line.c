@@ -204,7 +204,7 @@ void test_Arc2Line_MultLineNeedWholeAdjust(void)
 
     EndPoint_T end_point;
     end_point.wComConfig  = 16;
-    end_point.wWorkAdjCfg = 0;
+    end_point.wWorkAdjCfg = 512;
 
     InitStartPointDataBuf(&start_point,0);
     InitEndPointDataBuf(&end_point,0);

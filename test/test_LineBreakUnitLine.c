@@ -21,7 +21,7 @@ void tearDown(void)
     free(pdata);
 }
 
-void test_OnlyOneLineBreakUnitLine(void)
+void test_OneLineBreakNeedWholeAdjust(void)
 {
     StartPoint_T start_point;
     EndPoint_T end_point;
@@ -287,6 +287,5 @@ void test_TwoBreakLinePartAdjustLastOne(void)
     TEST_ASSERT_EQUAL_UINT32(1000,*((unsigned int *)pdata + 8));
     TEST_ASSERT_EQUAL_UINT32(2000,*((unsigned int *)pdata + 9));
     TEST_ASSERT_EQUAL_UINT32(10,get_AxisZAdjustBufLength());
-
 }
 
